@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RINA ✨ Birthday</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+ width:100%;
+ height:100%;
+ overflow:hidden;
+}
+
+body{
+ background:
+ radial-gradient(circle at 50% 35%,#263b70 0%,#111b42 32%,#080d27 65%,#030514 100%);
+ font-family:Georgia,"Times New Roman",serif;
+}
+
+canvas{
+ position:fixed;
+ inset:0;
+ width:100%;
+ height:100%;
+}
+
+.scene{
+ position:relative;
+ z-index:5;
+ width:100%;
+ height:100%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:18px;
+}
+
+.content{
+ width:100%;
+ max-width:650px;
+}
+
+.hidden{display:none!important}
+
+/* INTRO */
+
+.intro{
+ color:#f8f0d0;
+ font-family:Arial,sans-serif;
+ font-size:clamp(20px,5.5vw,38px);
+ font-weight:bold;
+ letter-spacing:4px;
+ text-shadow:
+ 0 0 8px #fff,
+ 0 0 22px #e8c878,
+ 0 0 45px #b99b4c;
+ animation:introIn 2s ease forwards;
+}
+
+@keyframes introIn{
+ from{opacity:0;transform:scale(.6);filter:blur(15px)}
+ to{opacity:1;transform:scale(1);filter:blur(0)}
+}
+
+/* NAME */
+
+.name{
+ width:100%;
+ white-space:nowrap;
+ text-align:center;
+ font-family:Georgia,"Times New Roman",serif;
+ font-size:clamp(64px,20vw,155px);
+ line-height:1;
+ font-weight:bold;
+ letter-spacing:clamp(2px,1vw,8px);
+
+ background:linear-gradient(
+  90deg,
+  #fff8d8,
+  #d8f6ff,
+  #ffffff,
+  #f4d98b,
+  #ffffff,
+  #fff8d8
+ );
+
+ background-size:400% auto;
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+
+ filter:
+ drop-shadow(0 0 8px #ffffff)
+ drop-shadow(0 0 22px #9de7ff)
+ drop-shadow(0 0 42px #d8b85c);
+
+ animation:nameGradient 5s linear infinite;
+}
+
+@keyframes nameGradient{
+ 0%{background-position:0% center}
+ 100%{background-position:400% center}
+}
+
+.letter{
+ display:inline-block;
+ opacity:0;
+ transform:translateY(45px) scale(.3);
+ animation:letterIn .75s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes letterIn{
+ 0%{
+  opacity:0;
+  transform:translateY(45px) scale(.3);
+  filter:blur(12px);
+ }
+ 70%{
+  opacity:1;
+  transform:translateY(-8px) scale(1.08);
+  filter:blur(0);
+ }
+ 100%{
+  opacity:1;
+  transform:translateY(0) scale(1);
+ }
+}
+
+/* BIRTHDAY */
+
+.birthday{
+ margin-top:30px;
+ font-family:Arial,sans-serif;
+ font-size:clamp(28px,8vw,62px);
+ font-weight:900;
+ letter-spacing:2px;
+
+ background:linear-gradient(
+  90deg,
+  #fff4b8,
+  #c8f4ff,
+  #e5c6ff,
+  #fff4b8
+ );
+
+ background-size:300% auto;
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+
+ animation:
+ birthdayIn 1.4s ease forwards,
+ birthdayGlow 4s linear infinite;
+}
+
+@keyframes birthdayIn{
+ from{
+  opacity:0;
+  transform:translateY(35px) scale(.7);
+  filter:blur(12px);
+ }
+ to{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+ }
+}
+
+@keyframes birthdayGlow{
+ 0%{background-position:0% center}
+ 100%{background-position:300% center}
+}
+
+/* CAKE */
+
+.cake{
+ margin-top:18px;
+ font-size:clamp(65px,17vw,105px);
+ filter:
+ drop-shadow(0 0 8px #fff)
+ drop-shadow(0 0 25px #ffd978)
+ drop-shadow(0 0 45px #8eeaff);
+
+ animation:cakeIn 1.2s ease forwards,
+ cakeFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes cakeIn{
+ from{opacity:0;transform:scale(.2)}
+ to{opacity:1;transform:scale(1)}
+}
+
+@keyframes cakeFloat{
+ 0%,100%{margin-top:18px}
+ 50%{margin-top:3px}
+}
+
+/* WISHES */
+
+.wishes{
+ margin-top:25px;
+}
+
+.line{
+ opacity:0;
+ margin:13px 0;
+ font-family:Arial,sans-serif;
+ font-size:clamp(18px,4.8vw,31px);
+ font-weight:bold;
+ line-height:1.35;
+}
+
+.line:nth-child(1){
+ color:#ffdca8;
+ text-shadow:0 0 12px #e8a95b,0 0 25px #8c6338;
+ animation:wishIn 1s ease .2s forwards;
+}
+
+.line:nth-child(2){
+ color:#d7f5ff;
+ text-shadow:0 0 12px #67dfff,0 0 25px #397c9b;
+ animation:wishIn 1s ease 1.4s forwards;
+}
+
+.line:nth-child(3){
+ color:#e9d4ff;
+ text-shadow:0 0 12px #c28cff,0 0 25px #72509b;
+ animation:wishIn 1s ease 2.6s forwards;
+}
+
+.line:nth-child(4){
+ color:#fff5bd;
+ text-shadow:0 0 12px #e8ca62,0 0 25px #947e32;
+ animation:wishIn 1s ease 3.8s forwards;
+}
+
+@keyframes wishIn{
+ from{
+  opacity:0;
+  transform:translateY(30px) scale(.88);
+  filter:blur(10px);
+ }
+ to{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+ }
+}
+
+/* FINAL */
+
+.final{
+ font-family:Georgia,"Times New Roman",serif;
+ font-size:clamp(23px,6vw,44px);
+ line-height:1.7;
+ font-weight:bold;
+ color:#fff7d6;
+
+ text-shadow:
+ 0 0 8px #fff,
+ 0 0 20px #e8ca72,
+ 0 0 42px #8fdfff;
+
+ animation:finalIn 2s ease forwards;
+}
+
+.final .rina{
+ color:#d9f7ff;
+ font-size:1.25em;
+ letter-spacing:4px;
+}
+
+@keyframes finalIn{
+ from{
+  opacity:0;
+  transform:scale(.55);
+  filter:blur(16px);
+ }
+ to{
+  opacity:1;
+  transform:scale(1);
+  filter:blur(0);
+ }
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+ .scene{padding:10px}
+
+ .name{
+  font-size:clamp(55px,19vw,74px);
+  letter-spacing:1px;
+ }
+
+ .birthday{
+  font-size:25px;
+ }
+
+ .line{
+  font-size:17px;
+  margin:10px 0;
+ }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="scene">
+<div class="content">
+
+ <div id="intro" class="intro">
+  ✦ A BEAUTIFUL SURPRISE ✦
+ </div>
+
+ <div id="name" class="name hidden"></div>
+
+ <div id="birthday" class="birthday hidden">
+  ✨ HAPPY BIRTHDAY ✨
+ </div>
+
+ <div id="cake" class="cake hidden">
+  🎂
+ </div>
+
+ <div id="wishes" class="wishes hidden">
+
+  <div class="line">🌷 May your days bloom with happiness</div>
+
+  <div class="line">🦋 May every dream become beautiful</div>
+
+  <div class="line">✨ May your life shine brighter</div>
+
+  <div class="line">🌙 Keep smiling, always and forever</div>
+
+ </div>
+
+ <div id="final" class="final hidden">
+  💫 A WORLD FULL OF BEAUTIFUL MOMENTS 💫
+  <br>
+  <span class="rina">RINA</span>
+  <br>
+  🌸 With Lots Of Love & Wishes 🌸
+ </div>
+
+</div>
+</div>
+
+<script>
+
+/* =========================
+   CANVAS
+========================= */
+
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+let W,H;
+
+function resize(){
+ W=canvas.width=innerWidth;
+ H=canvas.height=innerHeight;
+}
+
+resize();
+addEventListener("resize",resize);
+
+
+/* =========================
+   BOKEH BUBBLES
+========================= */
+
+const bubbles=[];
+
+for(let i=0;i<45;i++){
+
+ bubbles.push({
+  x:Math.random()*W,
+  y:Math.random()*H,
+  r:Math.random()*7+2,
+  speed:Math.random()*.35+.08,
+  alpha:Math.random()*.35+.08,
+  hue:Math.random()
+ });
+
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+const stars=[];
+
+for(let i=0;i<100;i++){
+
+ stars.push({
+  x:Math.random()*W,
+  y:Math.random()*H,
+  r:Math.random()*1.5+.3,
+  a:Math.random()
+ });
+
+}
+
+
+/* =========================
+   FLOWER PETALS
+========================= */
+
+const petals=[];
+
+for(let i=0;i<35;i++){
+
+ petals.push({
+  x:Math.random()*W,
+  y:Math.random()*H-H,
+  size:Math.random()*7+4,
+  speed:Math.random()*.7+.35,
+  drift:Math.random()*1.5-0.75,
+  rotate:Math.random()*Math.PI,
+  rotationSpeed:Math.random()*.04-.02,
+  type:Math.random()
+ });
+
+}
+
+
+/* =========================
+   DRAW PETAL
+========================= */
+
+function drawPetal(p){
+
+ ctx.save();
+
+ ctx.translate(p.x,p.y);
+ ctx.rotate(p.rotate);
+
+ ctx.beginPath();
+
+ ctx.moveTo(0,-p.size);
+
+ ctx.bezierCurveTo(
+  p.size*.9,-p.size*.5,
+  p.size*.9,p.size*.7,
+  0,p.size
+ );
+
+ ctx.bezierCurveTo(
+  -p.size*.9,p.size*.7,
+  -p.size*.9,-p.size*.5,
+  0,-p.size
+ );
+
+ ctx.closePath();
+
+ const colors=[
+  "rgba(255,202,169,.75)",
+  "rgba(220,195,255,.75)",
+  "rgba(255,235,166,.72)"
+ ];
+
+ ctx.fillStyle=colors[
+  Math.floor(p.type*colors.length)
+ ];
+
+ ctx.shadowBlur=12;
+ ctx.shadowColor=ctx.fillStyle;
+
+ ctx.fill();
+
+ ctx.restore();
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+function animate(){
+
+ ctx.clearRect(0,0,W,H);
+
+
+ /* Bubbles */
+
+ bubbles.forEach(b=>{
+
+  b.y-=b.speed;
+
+  if(b.y<-20){
+   b.y=H+20;
+   b.x=Math.random()*W;
+  }
+
+  ctx.beginPath();
+
+  ctx.arc(
+   b.x,
+   b.y,
+   b.r,
+   0,
+   Math.PI*2
+  );
+
+  const gradient=ctx.createRadialGradient(
+   b.x,b.y,0,
+   b.x,b.y,b.r*3
+  );
+
+  gradient.addColorStop(
+   0,
+   "rgba(210,245,255,"+b.alpha+")"
+  );
+
+  gradient.addColorStop(
+   1,
+   "rgba(180,170,255,0)"
+  );
+
+  ctx.fillStyle=gradient;
+
+  ctx.fill();
+
+ });
+
+
+ /* Stars */
+
+ stars.forEach(s=>{
+
+  const twinkle=
+   .35+
+   Math.sin(Date.now()/500+s.x)*.3;
+
+  ctx.beginPath();
+
+  ctx.arc(
+   s.x,
+   s.y,
+   s.r,
+   0,
+   Math.PI*2
+  );
+
+  ctx.fillStyle=
+   "rgba(255,245,210,"+twinkle+")";
+
+  ctx.shadowBlur=10;
+  ctx.shadowColor="#fff0b0";
+
+  ctx.fill();
+
+ });
+
+
+ /* Petals */
+
+ petals.forEach(p=>{
+
+  p.y+=p.speed;
+  p.x+=Math.sin(p.y*.01)*.25+p.drift*.01;
+  p.rotate+=p.rotationSpeed;
+
+  if(p.y>H+30){
+   p.y=-30;
+   p.x=Math.random()*W;
+  }
+
+  drawPetal(p);
+
+ });
+
+
+ requestAnimationFrame(animate);
+}
+
+animate();
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function wait(ms){
+ return new Promise(
+  resolve=>setTimeout(resolve,ms)
+ );
+}
+
+
+/* =========================
+   NAME
+========================= */
+
+async function showName(){
+
+ const name=document.getElementById("name");
+
+ name.classList.remove("hidden");
+ name.innerHTML="";
+
+ const text="RINA";
+
+ for(let i=0;i<text.length;i++){
+
+  const span=document.createElement("span");
+
+  span.className="letter";
+  span.textContent=text[i];
+
+  span.style.animationDelay=
+   (i*.35)+"s";
+
+  name.appendChild(span);
+
+  await wait(350);
+ }
+
+}
+
+
+/* =========================
+   MAIN SEQUENCE
+========================= */
+
+async function start(){
+
+ /* Intro */
+
+ await wait(2200);
+
+ document.getElementById("intro")
+ .style.display="none";
+
+
+ /* RINA */
+
+ await showName();
+
+ await wait(3300);
+
+ document.getElementById("name")
+ .style.display="none";
+
+
+ /* Birthday */
+
+ const birthday=
+ document.getElementById("birthday");
+
+ birthday.classList.remove("hidden");
+
+ await wait(3000);
+
+ birthday.style.display="none";
+
+
+ /* Cake */
+
+ const cake=
+ document.getElementById("cake");
+
+ cake.classList.remove("hidden");
+
+ await wait(2600);
+
+ cake.style.display="none";
+
+
+ /* Wishes */
+
+ const wishes=
+ document.getElementById("wishes");
+
+ wishes.classList.remove("hidden");
+
+ await wait(7000);
+
+ wishes.style.display="none";
+
+
+ /* Final */
+
+ const final=
+ document.getElementById("final");
+
+ final.classList.remove("hidden");
+
+}
+
+start();
+
+</script>
+
+</body>
+</html>
